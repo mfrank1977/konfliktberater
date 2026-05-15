@@ -1,360 +1,593 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Konfliktberater</title>
-<link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Konfliktberater</title>
 
-<meta name="theme-color" content="#d9cbb8">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Konfliktberater">
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#1f3435" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Konfliktberater" />
 
-<style>
-:root{
-  --bg:#f4efe8;
-  --card:#fffaf3;
-  --text:#2e2a26;
-  --muted:#7c7168;
-  --primary:#7f999b;
-  --primary-dark:#557174;
-  --sand:#dccbb7;
-  --soft:#eef3f2;
-  --danger:#b97768;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  background:linear-gradient(180deg,#f4efe8,#ebe3d8);
-  color:var(--text);
-}
-.app{
-  max-width:430px;
-  min-height:100vh;
-  margin:0 auto;
-  padding:28px 22px 34px;
-}
-.top{
-  padding-top:22px;
-}
-.badge{
-  display:inline-block;
-  background:#fff;
-  color:var(--primary-dark);
-  border-radius:999px;
-  padding:8px 12px;
-  font-size:13px;
-  box-shadow:0 6px 20px rgba(0,0,0,.05);
-}
-h1{
-  font-size:38px;
-  line-height:1.05;
-  margin:24px 0 12px;
-}
-h2{
-  font-size:25px;
-  margin:0 0 8px;
-}
-p{
-  line-height:1.48;
-  color:var(--muted);
-}
-.screen{
-  display:none;
-  animation:fade .28s ease;
-}
-.screen.active{display:block}
-.card{
-  background:rgba(255,250,243,.92);
-  border:1px solid rgba(255,255,255,.7);
-  border-radius:28px;
-  padding:22px;
-  margin-top:22px;
-  box-shadow:0 18px 45px rgba(88,70,48,.12);
-}
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:18px;
-}
-.option{
-  appearance:none;
-  border:0;
-  border-radius:21px;
-  padding:17px 13px;
-  min-height:78px;
-  background:#fff;
-  color:var(--text);
-  font-size:15px;
-  text-align:left;
-  box-shadow:0 8px 24px rgba(0,0,0,.06);
-}
-.option:active{
-  transform:scale(.98);
-}
-.option.full{
-  grid-column:1/-1;
-  min-height:auto;
-}
-.primary{
-  width:100%;
-  border:0;
-  border-radius:20px;
-  padding:17px 18px;
-  margin-top:18px;
-  background:var(--primary);
-  color:#fff;
-  font-size:17px;
-  font-weight:700;
-  box-shadow:0 10px 26px rgba(85,113,116,.25);
-}
-.secondary{
-  width:100%;
-  border:0;
-  border-radius:20px;
-  padding:15px 18px;
-  margin-top:12px;
-  background:#fff;
-  color:var(--primary-dark);
-  font-size:16px;
-  font-weight:650;
-}
-.back{
-  border:0;
-  background:transparent;
-  color:var(--primary-dark);
-  padding:0;
-  margin-bottom:18px;
-  font-size:16px;
-}
-.progress{
-  height:8px;
-  background:rgba(255,255,255,.75);
-  border-radius:999px;
-  overflow:hidden;
-  margin:20px 0 4px;
-}
-.bar{
-  height:100%;
-  width:20%;
-  background:var(--primary);
-  border-radius:999px;
-  transition:.25s;
-}
-.tip{
-  background:var(--soft);
-  border-left:5px solid var(--primary);
-  padding:15px;
-  border-radius:16px;
-  margin:14px 0;
-  color:#405356;
-}
-.ampel{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  background:#fff;
-  padding:10px 13px;
-  border-radius:999px;
-  color:var(--danger);
-  font-weight:700;
-  margin:12px 0;
-}
-ul{
-  padding-left:20px;
-  line-height:1.55;
-}
-.summary{
-  font-size:14px;
-  color:var(--muted);
-  background:#fff;
-  border-radius:18px;
-  padding:13px;
-  margin-top:14px;
-}
-@keyframes fade{
-  from{opacity:0; transform:translateY(8px)}
-  to{opacity:1; transform:translateY(0)}
-}
-</style>
+  <style>
+    :root{
+      --ink:#172324;
+      --muted:#6f7c7b;
+      --cream:#f6efe4;
+      --paper:#fffaf2;
+      --paper2:#f8f1e7;
+      --teal:#1f3435;
+      --teal2:#365e60;
+      --sage:#a8b9aa;
+      --sand:#d7c2a4;
+      --gold:#c79a55;
+      --rose:#b7776d;
+      --shadow: 0 24px 70px rgba(28,38,36,.18);
+      --softShadow: 0 12px 34px rgba(28,38,36,.10);
+    }
+
+    *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+    html,body{ margin:0; min-height:100%; }
+
+    body{
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 15% 5%, rgba(199,154,85,.26), transparent 32%),
+        radial-gradient(circle at 85% 0%, rgba(54,94,96,.25), transparent 33%),
+        linear-gradient(145deg, #f7efe3 0%, #efe3d2 48%, #dde7e1 100%);
+    }
+
+    .phone{
+      max-width:430px;
+      margin:0 auto;
+      min-height:100vh;
+      padding: max(22px, env(safe-area-inset-top)) 20px max(28px, env(safe-area-inset-bottom));
+      position:relative;
+      overflow:hidden;
+    }
+
+    .orb{
+      position:absolute;
+      width:210px;
+      height:210px;
+      border-radius:50%;
+      background:rgba(255,255,255,.32);
+      filter:blur(4px);
+      right:-110px;
+      top:90px;
+      pointer-events:none;
+    }
+
+    .status{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:16px;
+      position:relative;
+      z-index:2;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+
+    .logo{
+      width:37px;
+      height:37px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
+      color:#fff;
+      background:linear-gradient(135deg,var(--teal),var(--teal2));
+      box-shadow:0 10px 28px rgba(31,52,53,.28);
+    }
+
+    .pill{
+      border:1px solid rgba(255,255,255,.55);
+      background:rgba(255,255,255,.42);
+      backdrop-filter: blur(16px);
+      border-radius:999px;
+      padding:9px 12px;
+      color:var(--teal);
+      font-size:12px;
+      font-weight:750;
+    }
+
+    .progress{
+      height:7px;
+      background:rgba(255,255,255,.50);
+      border-radius:999px;
+      overflow:hidden;
+      margin:8px 0 22px;
+      box-shadow:inset 0 1px 2px rgba(0,0,0,.04);
+    }
+
+    .bar{
+      width:20%;
+      height:100%;
+      background:linear-gradient(90deg,var(--teal),var(--gold));
+      border-radius:999px;
+      transition:width .28s ease;
+    }
+
+    .screen{
+      display:none;
+      position:relative;
+      z-index:2;
+      animation:enter .24s ease both;
+    }
+
+    .screen.active{ display:block; }
+
+    @keyframes enter{
+      from{ opacity:0; transform:translateY(12px); }
+      to{ opacity:1; transform:translateY(0); }
+    }
+
+    h1{
+      font-size:44px;
+      line-height:.96;
+      margin:28px 0 14px;
+      letter-spacing:-1.7px;
+    }
+
+    h2{
+      font-size:27px;
+      line-height:1.08;
+      margin:0 0 10px;
+      letter-spacing:-.8px;
+    }
+
+    h3{
+      margin:20px 0 10px;
+      font-size:16px;
+    }
+
+    p{
+      color:var(--muted);
+      line-height:1.52;
+      font-size:16px;
+      margin:0;
+    }
+
+    .hero{
+      background:rgba(255,250,242,.72);
+      border:1px solid rgba(255,255,255,.70);
+      border-radius:34px;
+      padding:24px;
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(18px);
+      margin-top:24px;
+    }
+
+    .glass{
+      background:rgba(255,250,242,.76);
+      border:1px solid rgba(255,255,255,.68);
+      border-radius:30px;
+      padding:21px;
+      box-shadow:var(--softShadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .cards{
+      display:grid;
+      gap:12px;
+      margin-top:20px;
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:20px;
+    }
+
+    button{
+      font:inherit;
+      cursor:pointer;
+      touch-action:manipulation;
+    }
+
+    .choice{
+      width:100%;
+      border:1px solid rgba(255,255,255,.78);
+      background:rgba(255,255,255,.68);
+      border-radius:24px;
+      padding:17px 16px;
+      text-align:left;
+      min-height:74px;
+      color:var(--ink);
+      box-shadow:0 10px 28px rgba(30,42,40,.08);
+      transition:transform .12s ease, background .12s ease, border .12s ease;
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+
+    .choice:active{
+      transform:scale(.982);
+      background:#fff;
+    }
+
+    .icon{
+      flex:0 0 38px;
+      width:38px;
+      height:38px;
+      border-radius:15px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,rgba(31,52,53,.10),rgba(199,154,85,.18));
+      font-size:20px;
+    }
+
+    .choice strong{
+      display:block;
+      font-size:15.5px;
+      line-height:1.18;
+    }
+
+    .choice span{
+      display:block;
+      color:var(--muted);
+      font-size:12.5px;
+      margin-top:4px;
+      line-height:1.25;
+    }
+
+    .primary{
+      width:100%;
+      border:0;
+      border-radius:24px;
+      padding:18px 18px;
+      margin-top:20px;
+      color:#fff;
+      font-weight:850;
+      background:linear-gradient(135deg,var(--teal),var(--teal2));
+      box-shadow:0 18px 42px rgba(31,52,53,.28);
+    }
+
+    .secondary{
+      width:100%;
+      border:1px solid rgba(255,255,255,.75);
+      border-radius:24px;
+      padding:16px 18px;
+      margin-top:12px;
+      color:var(--teal);
+      font-weight:800;
+      background:rgba(255,255,255,.66);
+    }
+
+    .back{
+      border:0;
+      background:rgba(255,255,255,.44);
+      color:var(--teal);
+      border-radius:999px;
+      padding:10px 13px;
+      margin-bottom:18px;
+      font-weight:800;
+    }
+
+    .result-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:16px;
+    }
+
+    .signal{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 13px;
+      border-radius:999px;
+      background:rgba(255,255,255,.68);
+      color:#9b6a22;
+      font-size:13px;
+      font-weight:850;
+      white-space:nowrap;
+    }
+
+    .summary{
+      background:rgba(255,255,255,.58);
+      border-radius:22px;
+      padding:15px;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.45;
+      margin:14px 0;
+    }
+
+    .recommendation{
+      border-radius:28px;
+      padding:20px;
+      background:linear-gradient(145deg,rgba(31,52,53,.96),rgba(54,94,96,.96));
+      color:#fff;
+      box-shadow:0 24px 60px rgba(31,52,53,.26);
+      margin:18px 0;
+    }
+
+    .recommendation p{
+      color:rgba(255,255,255,.82);
+    }
+
+    .quote{
+      background:rgba(255,255,255,.70);
+      border:1px solid rgba(255,255,255,.82);
+      border-radius:24px;
+      padding:18px;
+      font-weight:750;
+      line-height:1.45;
+      color:var(--teal);
+      margin:12px 0;
+    }
+
+    ul{
+      padding-left:20px;
+      line-height:1.55;
+      color:#3b4443;
+    }
+
+    li{ margin:8px 0; }
+
+    .tiny{
+      color:var(--muted);
+      font-size:12px;
+      margin-top:12px;
+      text-align:center;
+    }
+  </style>
 </head>
+
 <body>
-<div class="app">
+  <main class="phone">
+    <div class="orb"></div>
 
-  <div class="progress"><div id="bar" class="bar"></div></div>
+    <div class="status">
+      <div class="brand"><div class="logo">◐</div>Konfliktberater</div>
+      <div class="pill">Beta-Dummy</div>
+    </div>
 
-  <section id="start" class="screen active">
-    <div class="top">
-      <span class="badge">Digitaler Konflikt-Kompass</span>
-      <h1>Konfliktberater</h1>
-      <p>Finde in wenigen Schritten eine ruhige, klare Empfehlung für deine aktuelle Situation.</p>
-      <div class="card">
-        <h2>Was brauchst du gerade?</h2>
-        <p>Die App hilft dir, die Situation zu sortieren, bevor du impulsiv reagierst.</p>
-        <button class="primary" onclick="go('bereich')">Neuen Konflikt einschätzen</button>
+    <div class="progress"><div id="bar" class="bar"></div></div>
+
+    <section class="screen active" id="start">
+      <h1>Erst Klarheit. Dann Reaktion.</h1>
+      <p>Sortiere deine Situation in wenigen Schritten und erhalte eine ruhige, konkrete Empfehlung.</p>
+
+      <div class="hero">
+        <h2>Was ist gerade los?</h2>
+        <p>Der Konfliktberater hilft dir, nicht aus Wut, Angst oder Verletzung heraus zu handeln.</p>
+        <button class="primary" data-go="bereich">Konflikt einschätzen</button>
+        <button class="secondary" data-go="sofort">Soforthilfe</button>
       </div>
-    </div>
-  </section>
+      <p class="tiny">Hinweis: Dieser Dummy ersetzt keine professionelle Hilfe in akuten Krisen.</p>
+    </section>
 
-  <section id="bereich" class="screen">
-    <button class="back" onclick="go('start')">← Zurück</button>
-    <h2>Wo findet der Konflikt statt?</h2>
-    <p>Wähle den Bereich, der am besten passt.</p>
-    <div class="grid">
-      <button class="option" onclick="choose('bereich','Partnerschaft','art')">💬 Partnerschaft</button>
-      <button class="option" onclick="choose('bereich','Familie','art')">🏠 Familie</button>
-      <button class="option" onclick="choose('bereich','Arbeit','art')">💼 Arbeit</button>
-      <button class="option" onclick="choose('bereich','Freundschaft','art')">🤝 Freundschaft</button>
-      <button class="option" onclick="choose('bereich','Nachbarschaft','art')">🌿 Nachbarschaft</button>
-      <button class="option" onclick="choose('bereich','Sonstiges','art')">✨ Sonstiges</button>
-    </div>
-  </section>
+    <section class="screen" id="sofort">
+      <button class="back" data-go="start">← Zurück</button>
+      <div class="glass">
+        <h2>Akut beruhigen</h2>
+        <p>Wenn du gerade kurz davor bist, impulsiv zu schreiben oder laut zu werden:</p>
+        <div class="recommendation">
+          <h3>90 Sekunden Pause</h3>
+          <p>Lege das Gerät weg, atme langsam aus und entscheide erst danach, ob du reagieren musst.</p>
+        </div>
+        <div class="quote">„Ich antworte später. Gerade möchte ich nichts sagen, was die Situation verschlimmert.“</div>
+        <button class="primary" data-go="bereich">Trotzdem einschätzen</button>
+      </div>
+    </section>
 
-  <section id="art" class="screen">
-    <button class="back" onclick="go('bereich')">← Zurück</button>
-    <h2>Was belastet dich am meisten?</h2>
-    <p>Hier soll sich möglichst jeder wiederfinden.</p>
-    <div class="grid">
-      <button class="option full" onclick="choose('art','Wir streiten immer wieder wegen Kleinigkeiten','gefuehl')">Wir streiten immer wieder wegen Kleinigkeiten</button>
-      <button class="option full" onclick="choose('art','Ich werde nicht richtig gehört','gefuehl')">Ich werde nicht richtig gehört</button>
-      <button class="option full" onclick="choose('art','Die Situation eskaliert ständig','gefuehl')">Die Situation eskaliert ständig</button>
-      <button class="option full" onclick="choose('art','Die andere Person zieht sich zurück','gefuehl')">Die andere Person zieht sich zurück</button>
-      <button class="option full" onclick="choose('art','Ich habe Angst vor der Reaktion','gefuehl')">Ich habe Angst vor der Reaktion</button>
-      <button class="option full" onclick="choose('art','Ich fühle mich unfair behandelt','gefuehl')">Ich fühle mich unfair behandelt</button>
-    </div>
-  </section>
+    <section class="screen" id="bereich">
+      <button class="back" data-go="start">← Zurück</button>
+      <h2>Wo findet der Konflikt statt?</h2>
+      <p>Wähle den Bereich, der am besten passt.</p>
 
-  <section id="gefuehl" class="screen">
-    <button class="back" onclick="go('art')">← Zurück</button>
-    <h2>Wie fühlst du dich gerade?</h2>
-    <p>Dein Gefühl beeinflusst, welche Reaktion jetzt hilfreich ist.</p>
-    <div class="grid">
-      <button class="option" onclick="choose('gefuehl','wütend','result')">🔥 Wütend</button>
-      <button class="option" onclick="choose('gefuehl','verletzt','result')">💔 Verletzt</button>
-      <button class="option" onclick="choose('gefuehl','hilflos','result')">🌀 Hilflos</button>
-      <button class="option" onclick="choose('gefuehl','ängstlich','result')">🌧 Ängstlich</button>
-      <button class="option" onclick="choose('gefuehl','überfordert','result')">🌫 Überfordert</button>
-      <button class="option" onclick="choose('gefuehl','enttäuscht','result')">🍂 Enttäuscht</button>
-    </div>
-  </section>
+      <div class="grid2">
+        <button class="choice" data-set="bereich" data-value="Partnerschaft" data-next="art"><span class="icon">💬</span><span><strong>Partnerschaft</strong><span>Nähe, Streit, Rückzug</span></span></button>
+        <button class="choice" data-set="bereich" data-value="Familie" data-next="art"><span class="icon">🏠</span><span><strong>Familie</strong><span>Eltern, Kinder, Verwandte</span></span></button>
+        <button class="choice" data-set="bereich" data-value="Arbeit" data-next="art"><span class="icon">💼</span><span><strong>Arbeit</strong><span>Team, Chef, Kollegen</span></span></button>
+        <button class="choice" data-set="bereich" data-value="Freundschaft" data-next="art"><span class="icon">🤝</span><span><strong>Freundschaft</strong><span>Nähe, Enttäuschung</span></span></button>
+        <button class="choice" data-set="bereich" data-value="Nachbarschaft" data-next="art"><span class="icon">🌿</span><span><strong>Nachbarn</strong><span>Grenzen, Lärm, Alltag</span></span></button>
+        <button class="choice" data-set="bereich" data-value="Sonstiges" data-next="art"><span class="icon">✨</span><span><strong>Sonstiges</strong><span>Passt nicht eindeutig</span></span></button>
+      </div>
+    </section>
 
-  <section id="result" class="screen">
-    <button class="back" onclick="go('gefuehl')">← Zurück</button>
-    <h2>Deine Empfehlung</h2>
-    <div class="summary" id="summary"></div>
-    <div class="ampel">🟡 Emotional festgefahren</div>
+    <section class="screen" id="art">
+      <button class="back" data-go="bereich">← Zurück</button>
+      <h2>Was belastet dich am meisten?</h2>
+      <p>Wähle die Aussage, in der du dich am ehesten wiederfindest.</p>
 
-    <div class="card">
-      <h2 id="resultTitle">Erst beruhigen, dann klären.</h2>
-      <div class="tip" id="mainTip"></div>
+      <div class="cards">
+        <button class="choice" data-set="art" data-value="Wiederkehrender Streit" data-next="gefuehl"><span class="icon">🔁</span><span><strong>Wir streiten immer wieder wegen Kleinigkeiten</strong><span>Es dreht sich im Kreis.</span></span></button>
+        <button class="choice" data-set="art" data-value="Nicht gehört werden" data-next="gefuehl"><span class="icon">🫥</span><span><strong>Ich werde nicht richtig gehört</strong><span>Meine Sicht kommt nicht an.</span></span></button>
+        <button class="choice" data-set="art" data-value="Eskalation" data-next="gefuehl"><span class="icon">⚡️</span><span><strong>Die Situation eskaliert ständig</strong><span>Es wird laut oder verletzend.</span></span></button>
+        <button class="choice" data-set="art" data-value="Rückzug" data-next="gefuehl"><span class="icon">🚪</span><span><strong>Die andere Person zieht sich zurück</strong><span>Funkstille oder Distanz.</span></span></button>
+        <button class="choice" data-set="art" data-value="Angst vor Reaktion" data-next="gefuehl"><span class="icon">🌧</span><span><strong>Ich habe Angst vor der Reaktion</strong><span>Ich traue mich kaum, etwas zu sagen.</span></span></button>
+        <button class="choice" data-set="art" data-value="Unfair behandelt" data-next="gefuehl"><span class="icon">⚖️</span><span><strong>Ich fühle mich unfair behandelt</strong><span>Es wirkt einseitig oder ungerecht.</span></span></button>
+      </div>
+    </section>
 
-      <h3>Jetzt hilfreich:</h3>
-      <ul id="steps"></ul>
+    <section class="screen" id="gefuehl">
+      <button class="back" data-go="art">← Zurück</button>
+      <h2>Wie fühlst du dich gerade?</h2>
+      <p>Das Gefühl entscheidet, was jetzt sinnvoll ist.</p>
 
-      <h3>Gesprächsstart:</h3>
-      <div class="tip" id="phrase"></div>
+      <div class="grid2">
+        <button class="choice" data-set="gefuehl" data-value="wütend" data-next="result"><span class="icon">🔥</span><span><strong>Wütend</strong><span>innerlich geladen</span></span></button>
+        <button class="choice" data-set="gefuehl" data-value="verletzt" data-next="result"><span class="icon">💔</span><span><strong>Verletzt</strong><span>getroffen</span></span></button>
+        <button class="choice" data-set="gefuehl" data-value="hilflos" data-next="result"><span class="icon">🌀</span><span><strong>Hilflos</strong><span>ohne Ausweg</span></span></button>
+        <button class="choice" data-set="gefuehl" data-value="ängstlich" data-next="result"><span class="icon">🌫</span><span><strong>Ängstlich</strong><span>unsicher</span></span></button>
+        <button class="choice" data-set="gefuehl" data-value="überfordert" data-next="result"><span class="icon">🌊</span><span><strong>Überfordert</strong><span>zu viel auf einmal</span></span></button>
+        <button class="choice" data-set="gefuehl" data-value="enttäuscht" data-next="result"><span class="icon">🍂</span><span><strong>Enttäuscht</strong><span>ernüchtert</span></span></button>
+      </div>
+    </section>
 
-      <button class="primary" onclick="go('start')">Neue Einschätzung</button>
-      <button class="secondary" onclick="copyPhrase()">Satz kopieren</button>
-    </div>
-  </section>
+    <section class="screen" id="result">
+      <button class="back" data-go="gefuehl">← Zurück</button>
+      <div class="result-head">
+        <div>
+          <h2>Deine Empfehlung</h2>
+          <p>Ruhig, konkret, direkt anwendbar.</p>
+        </div>
+        <div class="signal" id="signal">🟡 Festgefahren</div>
+      </div>
 
-</div>
+      <div class="summary" id="summary"></div>
 
-<script>
-const state = {
-  bereich: "",
-  art: "",
-  gefuehl: ""
-};
+      <div class="recommendation">
+        <h3 id="recTitle">Erst beruhigen, dann klären.</h3>
+        <p id="recText"></p>
+      </div>
 
-const progress = {
-  start:20,
-  bereich:40,
-  art:60,
-  gefuehl:80,
-  result:100
-};
+      <div class="glass">
+        <h3>Jetzt hilfreich:</h3>
+        <ul id="steps"></ul>
 
-function go(id){
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.getElementById('bar').style.width = progress[id] + '%';
-  window.scrollTo({top:0, behavior:'smooth'});
-  if(id === 'result') renderResult();
-}
+        <h3>Gesprächsstart:</h3>
+        <div class="quote" id="phrase"></div>
 
-function choose(key, value, next){
-  state[key] = value;
-  go(next);
-}
+        <button class="primary" id="copyBtn">Satz kopieren</button>
+        <button class="secondary" data-go="start">Neue Einschätzung</button>
+      </div>
+    </section>
+  </main>
 
-function renderResult(){
-  document.getElementById('summary').innerHTML =
-    `<strong>Bereich:</strong> ${state.bereich}<br>
-     <strong>Konflikt:</strong> ${state.art}<br>
-     <strong>Gefühl:</strong> ${state.gefuehl}`;
+  <script>
+    const state = {
+      bereich: "",
+      art: "",
+      gefuehl: ""
+    };
 
-  let tip = "Versuche nicht sofort eine endgültige Lösung zu erzwingen. Gerade ist wichtiger, die Situation zu beruhigen.";
-  let phrase = "Ich möchte verstehen, was gerade zwischen uns passiert, ohne dass wir uns weiter verletzen.";
-  let steps = [
-    "Lege eine kurze Pause ein, bevor du antwortest.",
-    "Beschreibe deine Wahrnehmung, ohne Vorwürfe zu starten.",
-    "Sprich in Ich-Botschaften statt in Schuldzuweisungen.",
-    "Formuliere eine konkrete Bitte für das nächste Gespräch."
-  ];
+    const progress = {
+      start: 20,
+      sofort: 25,
+      bereich: 40,
+      art: 60,
+      gefuehl: 80,
+      result: 100
+    };
 
-  if(state.art.includes("eskaliert")){
-    tip = "Wenn es immer wieder eskaliert, ist der nächste sinnvolle Schritt nicht mehr Argumentieren, sondern Unterbrechen.";
-    phrase = "Ich merke, dass wir gerade nicht weiterkommen. Ich möchte das Gespräch fortsetzen, wenn wir beide ruhiger sind.";
-    steps = [
-      "Gespräch kurz stoppen.",
-      "Keine langen Nachrichten im Affekt senden.",
-      "Einen konkreten späteren Zeitpunkt vorschlagen.",
-      "Erst dann über die Sache sprechen, nicht über alte Verletzungen."
-    ];
-  }
+    function go(screenId){
+      document.querySelectorAll(".screen").forEach(screen => screen.classList.remove("active"));
+      const target = document.getElementById(screenId);
+      if(!target) return;
+      target.classList.add("active");
+      document.getElementById("bar").style.width = (progress[screenId] || 20) + "%";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      if(screenId === "result") renderResult();
+    }
 
-  if(state.art.includes("Angst")){
-    tip = "Wenn du Angst vor der Reaktion hast, steht Sicherheit vor Klärung. Du musst kein Gespräch führen, das dich überfordert.";
-    phrase = "Ich möchte das ansprechen, aber nur in einem ruhigen Rahmen. Wenn es laut oder verletzend wird, pausiere ich das Gespräch.";
-    steps = [
-      "Wähle einen sicheren Rahmen.",
-      "Formuliere vorher deine Grenze.",
-      "Führe das Gespräch nicht unter Druck.",
-      "Hole dir Unterstützung, wenn du dich unsicher fühlst."
-    ];
-  }
+    function renderResult(){
+      const summary = document.getElementById("summary");
+      summary.innerHTML =
+        "<strong>Bereich:</strong> " + (state.bereich || "nicht gewählt") + "<br>" +
+        "<strong>Konfliktart:</strong> " + (state.art || "nicht gewählt") + "<br>" +
+        "<strong>Gefühl:</strong> " + (state.gefuehl || "nicht gewählt");
 
-  if(state.art.includes("zieht sich zurück")){
-    tip = "Rückzug erzeugt oft Druck. Hilfreicher ist eine Einladung ohne Drängen.";
-    phrase = "Ich merke, dass du dich zurückziehst. Mir wäre wichtig, dass wir einen ruhigen Moment finden, um darüber zu sprechen.";
-    steps = [
-      "Nicht hinterherlaufen.",
-      "Eine ruhige Einladung formulieren.",
-      "Keinen sofortigen Austausch erzwingen.",
-      "Sagen, was dir wichtig ist, ohne Druck aufzubauen."
-    ];
-  }
+      let signal = "🟡 Festgefahren";
+      let title = "Erst beruhigen, dann klären.";
+      let text = "Die Situation wirkt emotional aufgeladen. Jetzt hilft keine schnelle Gegenreaktion, sondern ein klarer nächster Schritt.";
+      let phrase = "Ich möchte verstehen, was gerade zwischen uns passiert, ohne dass wir uns weiter verletzen.";
+      let steps = [
+        "Warte mit einer Antwort, bis der erste Impuls abgeklungen ist.",
+        "Beschreibe nur eine konkrete Situation statt alles auf einmal.",
+        "Nutze Ich-Botschaften statt Schuldzuweisungen.",
+        "Bitte um einen ruhigen Moment für ein Gespräch."
+      ];
 
-  document.getElementById('mainTip').innerText = tip;
-  document.getElementById('phrase').innerText = phrase;
-  document.getElementById('steps').innerHTML = steps.map(s => `<li>${s}</li>`).join('');
-}
+      if(state.art === "Eskalation"){
+        signal = "🟠 Eskalationsgefahr";
+        title = "Unterbrechen statt gewinnen wollen.";
+        text = "Wenn Gespräche regelmäßig kippen, ist die Pause kein Rückzug, sondern Schutz vor weiterer Eskalation.";
+        phrase = "Ich merke, dass wir gerade nicht weiterkommen. Ich möchte das Gespräch später ruhiger fortsetzen.";
+        steps = [
+          "Stoppe das Gespräch freundlich, aber klar.",
+          "Schicke keine langen Nachrichten im Affekt.",
+          "Schlage einen konkreten späteren Zeitpunkt vor.",
+          "Beginne später mit einem Thema, nicht mit der ganzen Vergangenheit."
+        ];
+      }
 
-function copyPhrase(){
-  const text = document.getElementById('phrase').innerText;
-  navigator.clipboard.writeText(text).then(() => {
-    alert("Gesprächsstart kopiert.");
-  });
-}
+      if(state.art === "Angst vor Reaktion"){
+        signal = "🔴 Sicherheit zuerst";
+        title = "Klären nur in sicherem Rahmen.";
+        text = "Wenn du Angst vor der Reaktion hast, geht Sicherheit vor Harmonie. Du musst kein Gespräch führen, das dich einschüchtert.";
+        phrase = "Ich möchte das ansprechen, aber nur ruhig und respektvoll. Wenn es laut oder verletzend wird, pausiere ich das Gespräch.";
+        steps = [
+          "Wähle Ort und Zeitpunkt bewusst.",
+          "Formuliere vorher deine Grenze.",
+          "Führe das Gespräch nicht unter Druck.",
+          "Hole dir Unterstützung, wenn du dich unsicher fühlst."
+        ];
+      }
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./service-worker.js');
-}
-</script>
+      if(state.art === "Rückzug"){
+        signal = "🟡 Distanz";
+        title = "Einladen, nicht drängen.";
+        text = "Rückzug erzeugt oft Druck. Hilfreicher ist eine klare Einladung mit Raum für die andere Person.";
+        phrase = "Ich merke, dass du dich zurückziehst. Mir wäre wichtig, dass wir einen ruhigen Moment finden, um darüber zu sprechen.";
+        steps = [
+          "Nicht hinterherlaufen oder mehrfach nachsetzen.",
+          "Eine ruhige Einladung formulieren.",
+          "Keinen sofortigen Austausch erzwingen.",
+          "Klar sagen, warum dir das Gespräch wichtig ist."
+        ];
+      }
+
+      if(state.gefuehl === "wütend"){
+        steps.unshift("Schreibe deine Antwort erst in Notizen, nicht direkt in den Chat.");
+      }
+
+      document.getElementById("signal").textContent = signal;
+      document.getElementById("recTitle").textContent = title;
+      document.getElementById("recText").textContent = text;
+      document.getElementById("phrase").textContent = phrase;
+      document.getElementById("steps").innerHTML = steps.map(item => "<li>" + item + "</li>").join("");
+    }
+
+    document.addEventListener("click", function(event){
+      const button = event.target.closest("button");
+      if(!button) return;
+
+      const goTo = button.dataset.go;
+      if(goTo){
+        go(goTo);
+        return;
+      }
+
+      const key = button.dataset.set;
+      const value = button.dataset.value;
+      const next = button.dataset.next;
+      if(key && value && next){
+        state[key] = value;
+        go(next);
+      }
+    });
+
+    document.getElementById("copyBtn").addEventListener("click", async function(){
+      const text = document.getElementById("phrase").textContent;
+      try{
+        await navigator.clipboard.writeText(text);
+        this.textContent = "Kopiert";
+        setTimeout(() => this.textContent = "Satz kopieren", 1200);
+      }catch(e){
+        alert(text);
+      }
+    });
+
+    if("serviceWorker" in navigator && location.protocol.startsWith("http")){
+      navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+    }
+  </script>
 </body>
 </html>

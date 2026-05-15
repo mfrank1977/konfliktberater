@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Konfliktberater</title>
+
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#d9cbb8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Konfliktberater">
+
+<style>
+body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    background:#f4efe8;
+    color:#2e2e2e;
+}
+.container{
+    max-width:420px;
+    margin:auto;
+    min-height:100vh;
+    padding:24px;
+    box-sizing:border-box;
+}
+.card{
+    background:white;
+    border-radius:24px;
+    padding:20px;
+    margin-top:18px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.08);
+}
+h1{
+    margin-top:40px;
+    font-size:34px;
+}
+.subtitle{
+    color:#666;
+    line-height:1.5;
+}
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:18px;
+}
+button{
+    border:none;
+    border-radius:18px;
+    padding:16px;
+    background:#d9cbb8;
+    font-size:16px;
+}
+.primary{
+    width:100%;
+    margin-top:20px;
+    background:#8ea3a6;
+    color:white;
+    font-weight:600;
+}
+.tip{
+    background:#f5f7f8;
+    border-left:5px solid #8ea3a6;
+    padding:14px;
+    border-radius:12px;
+    margin-top:14px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Konfliktberater</h1>
+<p class="subtitle">
+Finde Klarheit in schwierigen Situationen.
+</p>
+
+<div class="card">
+<h3>Wo findet der Konflikt statt?</h3>
+
+<div class="grid">
+<button>Partnerschaft</button>
+<button>Familie</button>
+<button>Arbeit</button>
+<button>Freunde</button>
+<button>Nachbarschaft</button>
+<button>Schule</button>
+</div>
+
+<button class="primary" onclick="showResult()">
+Empfehlung anzeigen
+</button>
+</div>
+
+<div id="result" style="display:none;" class="card">
+<h2>Deine Empfehlung</h2>
+
+<div class="tip">
+Versuche nicht sofort eine Lösung zu erzwingen.
+</div>
+
+<ul>
+<li>Keine impulsiven Nachrichten senden</li>
+<li>Ich-Botschaften verwenden</li>
+<li>Gespräch vertagen, wenn Emotionen hochkochen</li>
+<li>Grenzen ruhig formulieren</li>
+</ul>
+
+<div class="tip">
+„Ich möchte verstehen, warum das gerade zwischen uns passiert.“
+</div>
+</div>
+
+</div>
+
+<script>
+function showResult(){
+    document.getElementById('result').style.display='block';
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior:'smooth'
+    });
+}
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "Konfliktberater",
+  "short_name": "Konfliktberater",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f4efe8",
+  "theme_color": "#d9cbb8",
+  "icons": []
+}
